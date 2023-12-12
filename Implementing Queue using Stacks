@@ -1,0 +1,44 @@
+class MyQueue {
+    Stack<Integer> st1;
+    Stack<Integer> st2;
+    public MyQueue() {
+        this.st1 = new Stack<>();
+        this.st2 = new Stack<>();
+    }
+    
+    public void push(int x) {
+        this.st1.push(x);
+    }
+    
+    public int pop() {
+        if(this.st2.empty() == false){
+            return this.st2.pop();
+        }
+        else{
+        while(this.st1.empty() == false){
+            this.st2.push(this.st1.pop());
+        }
+        return this.st2.pop();
+        }
+    }
+    
+    public int peek() {
+        if(this.st2.empty() == false){
+            return this.st2.peek();
+        }
+        else{
+            while(this.st1.empty() == false){
+                this.st2.push(this.st1.pop());
+            }
+            return this.st2.peek();
+        }
+    }
+    
+    public boolean empty() {
+        if(this.st1.empty() == true && this.st2.empty() == true){
+            return true;
+        }
+        else 
+        return false;
+    }
+}
