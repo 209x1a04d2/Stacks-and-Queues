@@ -1,0 +1,38 @@
+class Pair{
+    int price,span;
+    Pair(int price,int span){
+        this.price = price;
+        this.span = span;
+    }
+}
+class StockSpanner {
+    Stack<Pair> st;
+    
+    public StockSpanner() {
+        st = new Stack<>();
+       
+    }
+    
+    public int next(int price) {
+        if(st.isEmpty()){
+           
+            st.push(new Pair(price,1));
+            return 1;
+        }
+        int p1 = st.peek().price;
+        if(p1>price){
+            st.push(new Pair(price,1));
+            return 1;
+        }
+        else{
+            int sp=1;
+            while(st.isEmpty() == false && st.peek().price <= price){
+                sp+=st.peek().span;
+                st.pop();
+                
+            }
+            st.push(new Pair(price,sp));
+            return sp;
+        }
+    }
+}
